@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import offer from '../../assets/offer.json';
 
 @Component({
   selector: 'app-table-view',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './table-view.component.scss'
 })
 export class TableViewComponent {
-
+  constructor() {
+    console.log(offer);
+  }
 }
