@@ -22,18 +22,12 @@ export class TableViewComponent {
         }
       }
 
-      const groupedEvents = this.events.reduce(
-        (acc: { [key: string]: Event[] }, event) => {
-          const startDate = event.fixture.startDate.split('T')[0];
-          if (acc[startDate]) {
-            acc[startDate].push(event);
-          } else {
-            acc[startDate] = [event];
-          }
-          return acc;
-        },
-        {}
-      );
+      const groupedEvents = this.events.reduce((acc: { [key: string]: Event[] }, event) => {
+        const startDate = event.fixture.startDate.split('T')[0];
+        acc[startDate] = acc[startDate] || [];
+        acc[startDate].push(event);
+        return acc;
+      }, {});
 
       console.log(groupedEvents);
 
