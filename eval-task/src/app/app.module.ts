@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
 import { MatCommonModule } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { BasketComponent } from './basket/basket.component';
   imports: [
     BrowserModule,
     MatToolbarModule,
+    HttpClientModule,
     MatCommonModule,
     ReactiveFormsModule,
     RouterModule.forRoot([{ path: '', component: TableViewComponent }]),
