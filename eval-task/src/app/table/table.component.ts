@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Location } from '../../shared/model/model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './table.component.scss'
 })
 export class TableComponent {
+  @Input() data!: Observable<Location[]> | undefined;
 
+  locations: Location[] = [];
+
+  constructor() {}
 }

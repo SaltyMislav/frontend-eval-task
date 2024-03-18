@@ -1,1 +1,5 @@
-<p>table works!</p>
+<ng-container *ngFor="let location of data | async">
+  <ng-container *ngFor="let league of location.leagues">
+    {{ league.name }}
+  </ng-container>
+</ng-container>

@@ -1,37 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Event } from '../../shared/model/model';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { Location } from '../../shared/model/model';
 
 @Component({
   selector: 'app-table-view',
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.scss',
 })
-export class TableViewComponent {
-  events: Event[] = [];
+export class TableViewComponent implements OnInit{
+  offer: Observable<Location[]> | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdref: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.http.get<any>('../../assets/offer.json').subscribe((data) => {
-      for (const location of data.locations) {
-        for (const league of location.leagues) {
-          for (const eventDateGroup of league.eventDateGroups) {
-            this.events.push(...eventDateGroup.events);
-          }
-        }
-      }
-
-      const groupedEvents = this.events.reduce((acc: { [key: string]: Event[] }, event) => {
-        const startDate = event.fixture.startDate.split('T')[0];
-        acc[startDate] = acc[startDate] || [];
-        acc[startDate].push(event);
-        return acc;
-      }, {});
-
-      console.log(groupedEvents);
-
-      console.log(this.events);
-    });
+    this.offer = this.http.get<any>('../../assets/offer.json')
+      .pipe(
+        map((response: any) => {
+          return response.locations;
+        })
+      );
   }
 }

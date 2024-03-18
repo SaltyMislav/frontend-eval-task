@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCommonModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -18,6 +19,7 @@ import { BasketComponent } from './basket/basket.component';
     MatToolbarModule,
     HttpClientModule,
     MatCommonModule,
+    MatGridListModule,
     ReactiveFormsModule,
     RouterModule.forRoot([{ path: '', component: TableViewComponent }]),
   ],
