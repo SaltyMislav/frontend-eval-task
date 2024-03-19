@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCommonModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { TableViewComponent } from './table-view/table-view.component';
 import { TableComponent } from './table/table.component';
-import { BasketComponent } from './basket/basket.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -19,16 +18,15 @@ import { BasketComponent } from './basket/basket.component';
     MatToolbarModule,
     HttpClientModule,
     MatCommonModule,
+    MatTableModule,
     MatGridListModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([{ path: '', component: TableViewComponent }]),
+    RouterModule.forRoot([{ path: '', component: TableComponent}])
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
-    TableViewComponent,
     TableComponent,
-    BasketComponent,
   ],
   bootstrap: [AppComponent],
 })
