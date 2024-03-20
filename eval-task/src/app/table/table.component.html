@@ -1,13 +1,85 @@
-<mat-table [dataSource]="dataSource">
-  <!-- Column definitions -->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let league">{{ league.name }}</mat-cell>
-  </ng-container>
+<mat-card>
+  <div class="grid">
+    <div class="col-9">
+      <ng-container *ngFor="let league of test">
+        <ng-container *ngFor="let lig of league.leagues">
+          <mat-accordion [multi]="true">
+            <ng-container *ngFor="let date of lig.eventDateGroups">
+              <mat-expansion-panel [expanded]="true" [disabled]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{ date.date | date : "EEE, d MMM" }}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <table mat-table [dataSource]="date.events">
+                  <ng-container matColumnDef="participants">
+                    <th mat-header-cell *matHeaderCellDef>Clubs</th>
+                    <td
+                      mat-cell
+                      *matCellDef="let event"
+                      [innerHTML]="formatParticipantNames(event)"
+                    ></td>
+                  </ng-container>
+                  <ng-container matColumnDef="startDate">
+                    <th mat-header-cell *matHeaderCellDef>Time</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.fixture.startDate | date : "HH:mm" : "UTC" }}
+                    </td>
+                  </ng-container>
 
-  <!-- Add more column definitions as needed -->
+                  <ng-container matColumnDef="1">
+                    <th mat-header-cell *matHeaderCellDef>1</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.markets[0].picks[0].odds }}
+                    </td>
+                  </ng-container>
 
-  <!-- Table rows -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</mat-table>
+                  <ng-container matColumnDef="X">
+                    <th mat-header-cell *matHeaderCellDef>X</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.markets[0].picks[1].odds }}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="2">
+                    <th mat-header-cell *matHeaderCellDef>2</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.markets[0].picks[2].odds }}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="12">
+                    <th mat-header-cell *matHeaderCellDef>12</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.markets[1].picks[0].odds }}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="1X">
+                    <th mat-header-cell *matHeaderCellDef>1X</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.markets[1].picks[1].odds }}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="X2">
+                    <th mat-header-cell *matHeaderCellDef>X2</th>
+                    <td mat-cell *matCellDef="let event">
+                      {{ event.markets[1].picks[2].odds }}
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></tr>
+                </table>
+              </mat-expansion-panel>
+            </ng-container>
+          </mat-accordion>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</mat-card>

@@ -6,6 +6,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatCardModule } from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
@@ -15,9 +19,12 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
     MatCommonModule,
+    MatCardModule,MatFormFieldModule,
+    MatExpansionModule,
     MatTableModule,
     MatGridListModule,
     ReactiveFormsModule,
