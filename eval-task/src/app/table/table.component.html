@@ -1,85 +1,208 @@
-<mat-card>
-  <div class="grid">
-    <div class="col-9">
-      <ng-container *ngFor="let league of test">
-        <ng-container *ngFor="let lig of league.leagues">
-          <mat-accordion [multi]="true">
-            <ng-container *ngFor="let date of lig.eventDateGroups">
-              <mat-expansion-panel [expanded]="true" [disabled]="true">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{ date.date | date : "EEE, d MMM" }}
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <table mat-table [dataSource]="date.events">
-                  <ng-container matColumnDef="participants">
-                    <th mat-header-cell *matHeaderCellDef>Clubs</th>
-                    <td
-                      mat-cell
-                      *matCellDef="let event"
-                      [innerHTML]="formatParticipantNames(event)"
-                    ></td>
-                  </ng-container>
-                  <ng-container matColumnDef="startDate">
-                    <th mat-header-cell *matHeaderCellDef>Time</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.fixture.startDate | date : "HH:mm" : "UTC" }}
-                    </td>
-                  </ng-container>
+<div class="grid">
+  <div class="col-9">
+    <ng-container *ngFor="let league of test">
+      <ng-container *ngFor="let lig of league.leagues">
+        <h1>{{ lig.name }}</h1>
+        <mat-accordion [multi]="true">
+          <ng-container *ngFor="let date of lig.eventDateGroups">
+            <mat-expansion-panel [expanded]="true" [disabled]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ date.date | date : "EEE, d MMM" }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <table mat-table [dataSource]="date.events">
+                <ng-container matColumnDef="participants">
+                  <th mat-header-cell *matHeaderCellDef>Clubs</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [innerHTML]="formatParticipantNames(event)"
+                  ></td>
+                </ng-container>
+                <ng-container matColumnDef="startDate">
+                  <th mat-header-cell *matHeaderCellDef>Time</th>
+                  <td mat-cell *matCellDef="let event">
+                    {{ event.fixture.startDate | date : "HH:mm" : "UTC" }}
+                  </td>
+                </ng-container>
 
-                  <ng-container matColumnDef="1">
-                    <th mat-header-cell *matHeaderCellDef>1</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.markets[0].picks[0].odds }}
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="1">
+                  <th mat-header-cell *matHeaderCellDef>1</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [class.highlighted]="isCellClicked(event.id, event.markets[0].picks[0].id)"
+                    (click)="
+                      onClick(
+                        event,
+                        event.markets[0].picks[0].odds,
+                        event.markets[0].picks[0].id
+                      )
+                    "
+                  >
+                    {{ event.markets[0].picks[0].odds }}
+                  </td>
+                </ng-container>
 
-                  <ng-container matColumnDef="X">
-                    <th mat-header-cell *matHeaderCellDef>X</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.markets[0].picks[1].odds }}
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="X">
+                  <th mat-header-cell *matHeaderCellDef>X</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [class.highlighted]="isCellClicked(event.id, event.markets[0].picks[2].id)"
+                    (click)="
+                      onClick(
+                        event,
+                        event.markets[0].picks[2].odds,
+                        event.markets[0].picks[2].id
+                      )
+                    "
+                  >
+                    {{ event.markets[0].picks[2].odds }}
+                  </td>
+                </ng-container>
 
-                  <ng-container matColumnDef="2">
-                    <th mat-header-cell *matHeaderCellDef>2</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.markets[0].picks[2].odds }}
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="2">
+                  <th mat-header-cell *matHeaderCellDef>2</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [class.highlighted]="isCellClicked(event.id, event.markets[0].picks[1].id)"
+                    (click)="
+                      onClick(
+                        event,
+                        event.markets[0].picks[1].odds,
+                        event.markets[0].picks[1].id
+                      )
+                    "
+                  >
+                    {{ event.markets[0].picks[1].odds }}
+                  </td>
+                </ng-container>
 
-                  <ng-container matColumnDef="12">
-                    <th mat-header-cell *matHeaderCellDef>12</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.markets[1].picks[0].odds }}
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="12">
+                  <th mat-header-cell *matHeaderCellDef>12</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [class.highlighted]="isCellClicked(event.id, event.markets[1].picks[0].id)"
+                    (click)="
+                      onClick(
+                        event,
+                        event.markets[1].picks[0].odds,
+                        event.markets[1].picks[0].id
+                      )
+                    "
+                  >
+                    {{ event.markets[1].picks[0].odds }}
+                  </td>
+                </ng-container>
 
-                  <ng-container matColumnDef="1X">
-                    <th mat-header-cell *matHeaderCellDef>1X</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.markets[1].picks[1].odds }}
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="1X">
+                  <th mat-header-cell *matHeaderCellDef>1X</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [class.highlighted]="isCellClicked(event.id, event.markets[1].picks[1].id)"
+                    (click)="
+                      onClick(
+                        event,
+                        event.markets[1].picks[1].odds,
+                        event.markets[1].picks[1].id
+                      )
+                    "
+                  >
+                    {{ event.markets[1].picks[1].odds }}
+                  </td>
+                </ng-container>
 
-                  <ng-container matColumnDef="X2">
-                    <th mat-header-cell *matHeaderCellDef>X2</th>
-                    <td mat-cell *matCellDef="let event">
-                      {{ event.markets[1].picks[2].odds }}
-                    </td>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr
-                    mat-row
-                    *matRowDef="let row; columns: displayedColumns"
-                  ></tr>
-                </table>
-              </mat-expansion-panel>
-            </ng-container>
-          </mat-accordion>
-        </ng-container>
+                <ng-container matColumnDef="X2">
+                  <th mat-header-cell *matHeaderCellDef>X2</th>
+                  <td
+                    mat-cell
+                    *matCellDef="let event"
+                    [class.highlighted]="isCellClicked(event.id, event.markets[1].picks[2].id)"
+                    (click)="
+                      onClick(
+                        event,
+                        event.markets[1].picks[2].odds,
+                        event.markets[1].picks[2].id
+                      )
+                    "
+                  >
+                    {{ event.markets[1].picks[2].odds }}
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+            </mat-expansion-panel>
+          </ng-container>
+        </mat-accordion>
       </ng-container>
-    </div>
-    <div class="col-3"></div>
+    </ng-container>
   </div>
-</mat-card>
+  <div class="col-3">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Betslip</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list-item class="bet-item" *ngFor="let item of selectedValues">
+          <div class="team-names">
+            <h3>{{ item.participants[0].name }}</h3>
+            <h3>{{ item.participants[1].name }}</h3>
+          </div>
+          <br />
+          <div class="odds">
+            <p>
+              <strong>{{ item.index }}</strong>
+            </p>
+            <p>{{ item.value }}</p>
+          </div>
+          <div class="delete-button">
+            <button mat-icon-button (click)="onDelete(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+
+        <mat-card-footer>
+          <h3><strong>Amount</strong></h3>
+          <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Fill form field</mat-label>
+            <input
+              matInput
+              [(ngModel)]="numberValue"
+              class="text-right"
+              min="10"
+              max="500"
+              (blur)="calculateValue()"
+              step="0.01"
+              type="number"
+              placeholder="Amount (0.00)"
+            />
+            <mat-error>Nmber needs to be between 10 and 500! </mat-error>
+          </mat-form-field>
+          <br>
+          <div class="grid">
+            <h3 class="col"><strong>Total Odds</strong></h3>
+            <p class="col text-right">
+              <strong>{{ totalOdds }}</strong>
+            </p>
+          </div>
+          <div class="grid">
+            <h3 class="col"><strong>Win Amount</strong></h3>
+            <p class="col text-right">
+              <strong>{{ result }}</strong> EUR
+            </p>
+          </div>
+        </mat-card-footer>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

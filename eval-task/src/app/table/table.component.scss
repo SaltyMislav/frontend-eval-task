@@ -1,5 +1,5 @@
 :host ::ng-deep {
-  $gutter: 0.5rem;
+  // $gutter: 0.5rem;
 
   .mat-expansion-panel-header[aria-disabled="true"]
     .mat-expansion-panel-header-title,
@@ -8,84 +8,45 @@
     color: var(--mat-expansion-header-text-color);
   }
 
-  // .mat-mdc-header-row .mat-mdc-header-cell:first-child {
-  //   display: none;
-  // }
-
-  .grid {
+  mat-list-item {
+    background: #f2f2f2; /* Adjust the color to match your image */
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px; /* Adjust the padding as needed */
+    border-radius: 4px; /* Adjust for rounded corners */
+    margin-bottom: 8px; /* Adjust the margin as needed */
   }
 
-  .col-1 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 8.3333%;
+  .team-names h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem; /* Adjust the font size as needed */
+    color: #333; /* Adjust the text color as needed */
+    line-height: 1.5; /* Adjust the line height as needed */
   }
 
-  .col-2 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 16.6667%;
+  .team-odds {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
-  .col-3 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 25%;
+  .team-odds span {
+    font-size: 1rem; /* Adjust the font size as needed */
+    color: #333; /* Adjust the text color as needed */
   }
 
-  .col-4 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 33.3333%;
+  .delete-icon {
+    margin-left: auto;
   }
 
-  .col-5 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 41.6667%;
+  /* Adjust the button styles as necessary */
+  button[mat-icon-button] {
+    color: #f00; /* Adjust to match the delete icon color */
   }
 
-  .col-6 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 50%;
-  }
-
-  .col-7 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 58.3333%;
-  }
-
-  .col-8 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 66.6667%;
-  }
-
-  .col-9 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 75%;
-  }
-
-  .col-10 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 83.3333%;
-  }
-
-  .col-11 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 91.6667%;
-  }
-
-  .col-12 {
-    flex: 0 0 auto;
-    padding: $gutter;
-    width: 100%;
+  .highlighted {
+    background-color: red;
   }
 }
